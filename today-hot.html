@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>今天热帖 - 荷兰同城</title>
+<meta name="description" content="荷兰同城今天热帖，集中查看今日发布的招聘、求职、租房、商铺、交友和优惠信息。">
+<meta name="keywords" content="荷兰今天热帖,荷兰最新信息,荷兰华人招聘,荷兰租房">
+<meta name="author" content="荷兰同城 NTC">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#0E3B4A">
+<meta property="og:title" content="今天热帖 - 荷兰同城">
+<meta property="og:description" content="集中查看荷兰同城今日发布的热门信息。">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://ntc.nl/today-hot.html">
+<link rel="canonical" href="https://ntc.nl/today-hot.html">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='10' fill='%23DF7A3A'/%3E%3Cpath d='M12.2 15.2c0-4.1 2.2-6.6 4.3-4.6 0.9-2.9 5.2-2.9 6.1 0 2.1-2 4.3.5 4.3 4.6 0 5.1-3.6 8.8-7.35 8.8s-7.35-3.7-7.35-8.8z' fill='white'/%3E%3Cpath d='M20 24v9.4' stroke='white' stroke-width='2.1' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+<div id="page-content">
+  <div class="container">
+    <nav class="breadcrumb"><a href="index.html">首页</a> › <span>今天热帖</span></nav>
+    <div class="section-head">
+      <div>
+        <div class="section-title"><span class="st-emoji">🔥</span>今天热帖</div>
+        <p style="margin:5px 0 0;color:var(--ink-3);font-size:12px">仅展示今天发布的信息，按发布时间排序。</p>
+      </div>
+      <a class="btn btn-outline btn-sm" href="index.html">返回首页</a>
+    </div>
+    <section class="card card-pad today-hot-page-card">
+      <div class="result-bar" style="margin-top:0"><div class="count">今日共 <b id="todayCount">0</b> 条信息</div></div>
+      <ul class="rank-list" id="todayList"></ul>
+      <div class="more-row"><button class="btn btn-outline btn-lg" id="todayMore">加载更多</button></div>
+    </section>
+  </div>
+</div>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/common.js"></script>
+<script>
+(function () {
+  initShell({ cat: '', tab: 'cat' });
+  const PAGE = 20;
+  let shown = 0;
+  const list = allPosts().filter((p) => p.mins < 24 * 60).sort((a, b) => a.mins - b.mins);
+  const catFallback = { name: '', color: 'var(--ink-3)', bg: '#F1F5F7' };
+  function row(p, i) {
+    const c = CATEGORIES.find((x) => x.id === p.cat) || catFallback;
+    return `<li><span class="rank-no">${i + 1}</span><span class="rank-main">
+      <a class="rank-title" href="detail.html?id=${encodeURIComponent(p.id)}" title="${esc(p.title)}">${esc(p.title)}</a>
+      <span class="rank-meta"><span class="rank-cat" style="background:${c.bg};color:${c.color}">${esc(c.name)}</span><span class="rank-stat">👁 ${p.views || 0}</span><span class="rank-stat">♥ ${p.likes || 0}</span><span class="rank-stat">${timeAgo(p.mins || 0)}</span></span>
+    </span></li>`;
+  }
+  function render() {
+    const next = list.slice(shown, shown + PAGE);
+    document.getElementById('todayList').insertAdjacentHTML('beforeend', next.map((p, i) => row(p, shown + i)).join(''));
+    shown += next.length;
+    const more = document.getElementById('todayMore');
+    more.classList.toggle('hide', shown >= list.length);
+    more.textContent = shown >= list.length ? '已加载全部' : '加载更多 (' + (list.length - shown) + ')';
+  }
+  document.getElementById('todayCount').textContent = list.length;
+  render();
+  document.getElementById('todayMore').addEventListener('click', render);
+})();
+</script>
+</body>
+</html>

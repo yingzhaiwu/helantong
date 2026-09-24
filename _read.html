@@ -1,0 +1,10 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"></head><body><pre id="out"></pre><script>
+const out = document.getElementById('out');
+const data = {
+  user: localStorage.getItem('hh_user'),
+  ad_slots: localStorage.getItem('hh_ad_slots'),
+  ad_log: localStorage.getItem('hh_ad_log'),
+  clean_ts: localStorage.getItem('hh_ad_clean_ts')
+};
+out.textContent = JSON.stringify(data, null, 2);
+</script></body></html>

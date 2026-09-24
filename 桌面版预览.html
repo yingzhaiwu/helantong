@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>桌面版预览 · 荷兰同城 HelanTC</title>
+<meta name="theme-color" content="#0E3B4A">
+<style>
+  :root {
+    --brand: #0E3B4A; --brand-600: #0A2C39; --brand-700: #071F2A;
+    --teal: #12858F; --brand-50: #E6F1F4; --brand-100: #C1DBE2;
+    --ink: #0E1A21; --ink-2: #3D5160; --ink-3: #71858F;
+    --line: #DAE5E8; --line-2: #BFD1D6; --card-2: #F7FBFC;
+    --grad-brand: linear-gradient(135deg, #1B7F8C 0%, #0E3B4A 52%, #071F2A 100%);
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; }
+  body {
+    background: #E9EFF2;
+    background-image:
+      radial-gradient(760px 400px at 10% -6%, rgba(18, 133, 143, .12), transparent 62%),
+      linear-gradient(180deg, #F3F8F9 0%, #E7EFF2 100%);
+    color: var(--ink);
+    font: 14px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
+      "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    display: flex; flex-direction: column; height: 100%;
+  }
+
+  /* ---------------- 工具栏 ---------------- */
+  .bar {
+    flex-shrink: 0; display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+    padding: 10px 14px;
+    background: rgba(255, 255, 255, .86);
+    backdrop-filter: saturate(180%) blur(14px);
+    -webkit-backdrop-filter: saturate(180%) blur(14px);
+    border-bottom: 1px solid rgba(191, 209, 214, .75);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, .65), 0 4px 18px rgba(7, 31, 42, .07);
+    position: relative; z-index: 5;
+  }
+  .bar-title {
+    display: flex; align-items: center; gap: 8px; font-weight: 800; font-size: 14px;
+    color: var(--brand-700); white-space: nowrap;
+  }
+  .bar-title .dot {
+    width: 9px; height: 9px; border-radius: 50%; background: var(--grad-brand);
+    box-shadow: 0 0 0 3px rgba(18, 133, 143, .18);
+  }
+  .bar-note { font-size: 12px; color: var(--ink-3); white-space: nowrap; }
+
+  .group { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+  .group-label { font-size: 12px; color: var(--ink-3); white-space: nowrap; }
+
+  .chip {
+    height: 30px; padding: 0 12px; border-radius: 999px; cursor: pointer;
+    border: 1px solid var(--line-2); background: #fff; color: var(--ink-2);
+    font: inherit; font-size: 13px; font-weight: 600; white-space: nowrap;
+    display: inline-flex; align-items: center; gap: 5px;
+    transition: all .16s ease;
+  }
+  .chip:hover { border-color: var(--teal); color: var(--brand); background: var(--brand-50); }
+  .chip.on {
+    background: var(--grad-brand); color: #fff; border-color: transparent;
+    box-shadow: 0 3px 10px rgba(14, 59, 74, .22);
+  }
+  .spacer { margin-left: auto; }
+
+  .open-new {
+    height: 30px; padding: 0 13px; border-radius: 999px; text-decoration: none;
+    display: inline-flex; align-items: center; gap: 5px;
+    border: 1px solid var(--line-2); background: #fff; color: var(--brand-600);
+    font-size: 13px; font-weight: 700; white-space: nowrap; transition: all .16s ease;
+  }
+  .open-new:hover { border-color: var(--teal); background: var(--brand-50); }
+
+  /* ---------------- 画布 ---------------- */
+  .stage {
+    flex: 1; min-height: 0; overflow: auto; padding: 14px;
+    -webkit-overflow-scrolling: touch;
+  }
+  .wrap {
+    position: relative; margin: 0 auto;
+    border-radius: 14px; overflow: hidden;
+    background: #fff;
+    box-shadow: 0 14px 40px rgba(7, 31, 42, .16), 0 2px 8px rgba(7, 31, 42, .06);
+    outline: 1px solid rgba(191, 209, 214, .9);
+  }
+  .wrap iframe {
+    position: absolute; top: 0; left: 0; border: 0; display: block;
+    transform-origin: top left; background: #fff;
+  }
+  .stage-note {
+    text-align: center; font-size: 12px; color: var(--ink-3);
+    margin: 10px auto 0; max-width: 640px;
+  }
+  .stage-note b { color: var(--brand-600); }
+
+  @media (max-width: 720px) {
+    .bar { gap: 8px; padding: 9px 10px; }
+    .bar-note { display: none; }
+    .chip { height: 28px; padding: 0 10px; font-size: 12px; }
+    .stage { padding: 10px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <div class="bar-title"><span class="dot"></span>桌面版预览</div>
+  <span class="bar-note">荷兰同城 HelanTC · 固定画布自动缩放</span>
+
+  <div class="group" id="pageGroup">
+    <span class="group-label">页面</span>
+  </div>
+
+  <div class="group spacer" id="widthGroup">
+    <span class="group-label">宽度</span>
+  </div>
+
+  <button class="chip" id="adminBtn" type="button" title="切换普通访客 / 管理员，用于查看广告位编辑入口">👤 普通访客</button>
+
+  <a class="open-new" id="openNew" href="index.html" target="_blank" rel="noopener">↗ 新窗口</a>
+</div>
+
+<div class="stage" id="stage">
+  <div class="wrap" id="wrap">
+    <iframe id="fr" title="荷兰同城页面预览" src="index.html"></iframe>
+  </div>
+  <p class="stage-note" id="note"></p>
+</div>
+
+<script>
+/* 与站点同源：先把 Cookie 同意与演示登录态写好，避免弹窗遮住页面 */
+(function seed() {
+  try {
+    if (!localStorage.getItem('hh_cookie_consent')) {
+      localStorage.setItem('hh_cookie_consent', JSON.stringify({
+        version: '2026-09-18', mode: 'all',
+        choices: { necessary: true, preference: true, analytics: true, marketing: false },
+        at: Date.now()
+      }));
+    }
+    if (!localStorage.getItem('hh_user')) {
+      localStorage.setItem('hh_user', JSON.stringify({ name: '陈小雨', account: 'demo@ntc.nl' }));
+    }
+    if (!localStorage.getItem('hh_points')) localStorage.setItem('hh_points', '860');
+  } catch (e) { /* file:// 下不可写，忽略 */ }
+})();
+
+const PAGES = [
+  { f: 'index.html', t: '首页' },
+  { f: 'today-hot.html', t: '今天热帖' },
+  { f: 'city-latest.html', t: '同城最新' },
+  { f: 'ad-rent.html', t: '广告位招租' },
+  { f: 'list.html', t: '全部信息' },
+  { f: 'detail.html?id=1001', t: '详情页' },
+  { f: 'publish.html', t: '发布信息' },
+  { f: 'user.html', t: '个人中心' },
+  { f: 'login.html', t: '登录注册' },
+  { f: 'build.html', t: '建筑装修' },
+  { f: 'ads.html', t: '其他信息' },
+  { f: 'about.html', t: '平台介绍' },
+  { f: 'cookie.html', t: 'Cookie 政策' }
+];
+
+const WIDTHS = [
+  { w: 1440, t: '1440 宽屏' },
+  { w: 1280, t: '1280 笔记本' },
+  { w: 1024, t: '1024 小屏' },
+  { w: 390, t: '390 手机' }
+];
+
+const fr = document.getElementById('fr');
+const wrap = document.getElementById('wrap');
+const stage = document.getElementById('stage');
+const note = document.getElementById('note');
+const openNew = document.getElementById('openNew');
+
+let curPage = PAGES[0].f;
+let curW = 1440;
+let contentH = 1200;
+
+/* ---------- 工具栏 ---------- */
+const pageGroup = document.getElementById('pageGroup');
+PAGES.forEach((p) => {
+  const b = document.createElement('button');
+  b.className = 'chip' + (p.f === curPage ? ' on' : '');
+  b.type = 'button';
+  b.textContent = p.t;
+  b.addEventListener('click', () => {
+    curPage = p.f;
+    [...pageGroup.querySelectorAll('.chip')].forEach((x) => x.classList.toggle('on', x === b));
+    fr.src = p.f;
+    openNew.href = p.f;
+  });
+  pageGroup.appendChild(b);
+});
+
+const widthGroup = document.getElementById('widthGroup');
+WIDTHS.forEach((it) => {
+  const b = document.createElement('button');
+  b.className = 'chip' + (it.w === curW ? ' on' : '');
+  b.type = 'button';
+  b.textContent = it.t;
+  b.addEventListener('click', () => {
+    curW = it.w;
+    [...widthGroup.querySelectorAll('.chip')].forEach((x) => x.classList.toggle('on', x === b));
+    fit();
+  });
+  widthGroup.appendChild(b);
+});
+
+/* ---------- 管理员 / 普通访客 视角切换 ---------- */
+const ADMIN_ACCOUNT = 'admin@ntc.nl';
+const adminBtn = document.getElementById('adminBtn');
+
+function isAdminNow() {
+  try {
+    const u = JSON.parse(localStorage.getItem('hh_user') || 'null');
+    /* 与站内 Store.isAdmin() 保持一致：账号在名单内 + role === 'admin' */
+    return !!(u && u.role === 'admin' && String(u.account || '').toLowerCase() === ADMIN_ACCOUNT);
+  } catch (e) { return false; }
+}
+function refreshAdminBtn() {
+  const on = isAdminNow();
+  adminBtn.classList.toggle('on', on);
+  adminBtn.textContent = on ? '🔑 管理员视角' : '👤 普通访客';
+  adminBtn.title = on ? '当前以管理员身份预览（可编辑广告位），点击切回普通访客' : '当前以普通访客身份预览，点击切换为管理员';
+}
+adminBtn.addEventListener('click', () => {
+  try {
+    const next = isAdminNow()
+      ? { name: '陈小雨', account: 'demo@ntc.nl' }
+      : { name: '站长', account: ADMIN_ACCOUNT, role: 'admin' };
+    localStorage.setItem('hh_user', JSON.stringify(next));
+  } catch (e) { }
+  refreshAdminBtn();
+  try { fr.contentWindow.location.reload(); }
+  catch (e) { fr.src = curPage; }
+});
+refreshAdminBtn();
+
+/* ---------- 缩放适配 ---------- */
+function fit() {
+  const avail = Math.max(240, stage.clientWidth - 28);
+  const s = Math.min(1, avail / curW);
+  fr.style.width = curW + 'px';
+  fr.style.height = contentH + 'px';
+  fr.style.transform = 'scale(' + s + ')';
+  wrap.style.width = Math.round(curW * s) + 'px';
+  wrap.style.height = Math.round(contentH * s) + 'px';
+  note.innerHTML = '画布 <b>' + curW + 'px</b> · 缩放 <b>' + Math.round(s * 100) + '%</b>'
+    + ' · 页面实际高度 <b>' + contentH + 'px</b>'
+    + (s < 1 ? ' · 内容按比例缩小显示，布局与真实桌面端一致' : '');
+}
+
+/* 读取 iframe 内真实内容高度（同源） */
+function measure() {
+  try {
+    const d = fr.contentDocument;
+    if (!d || !d.body) return;
+    const h = Math.max(d.documentElement.scrollHeight, d.body.scrollHeight, 800);
+    if (h && Math.abs(h - contentH) > 4) { contentH = h; fit(); }
+  } catch (e) { /* 跨源时保持默认高度 */ }
+}
+
+fr.addEventListener('load', () => {
+  fit();
+  measure();
+  setTimeout(measure, 400);
+  setTimeout(measure, 1200);
+});
+
+window.addEventListener('resize', fit);
+fit();
+</script>
+</body>
+</html>

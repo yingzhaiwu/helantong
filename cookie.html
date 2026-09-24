@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Cookie 政策 - 荷兰同城</title>
+<meta name="description" content="荷兰同城（NTC）Cookie 政策：Cookie 与本地存储的使用类别、用途、保存期限，以及你如何随时更改或撤回同意（GDPR / AVG / ePrivacy）。">
+<meta name="theme-color" content="#0E3B4A">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='10' fill='%23DF7A3A'/%3E%3Cpath d='M12.2 15.2c0-4.1 2.2-6.6 4.3-4.6.9-2.9 5.2-2.9 6.1 0 2.1-2 4.3.5 4.3 4.6 0 5.1-3.6 8.8-7.35 8.8s-7.35-3.7-7.35-8.8z' fill='white'/%3E%3Cpath d='M20 24v9.4' stroke='white' stroke-width='2.1' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body data-doc="cookie">
+
+<div id="page-content">
+  <div class="container">
+    <nav class="breadcrumb"><a href="index.html">首页</a> › <span>Cookie 政策</span></nav>
+
+    <div class="layout">
+      <div>
+        <div class="page-banner" style="background:linear-gradient(135deg,#1B7F8C 0%,#0E3B4A 55%,#071F2A 100%)">
+          <div>
+            <h1>🍪 Cookie 政策</h1>
+            <p>说明本站如何使用 Cookie 与浏览器本地存储、分为哪几类、保存多久，以及你如何随时更改或撤回同意。</p>
+          </div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <button class="btn btn-outline" data-invite style="background:#fff;border-color:#fff;color:#0E3B4A">👥 邀请好友 +100</button>
+            <button class="btn btn-primary" id="ckOpen">⚙️ Cookie 设置</button>
+          </div>
+        </div>
+
+        <div class="card card-pad legal-doc" style="margin-top:14px">
+          <div class="consent-card">
+            <div class="cc-txt">
+              <b id="ckStateTitle">当前同意状态</b>
+              <span id="ckStateDesc">读取中…</span>
+            </div>
+            <div class="cc-acts">
+              <button class="btn btn-primary btn-sm" id="ckAcceptAll">全部接受</button>
+              <button class="btn btn-outline btn-sm" id="ckNecessary">仅必要 Cookie</button>
+              <button class="btn btn-outline btn-sm" id="ckCustom">自定义设置</button>
+              <button class="btn btn-outline btn-sm" id="ckRevoke">撤回同意</button>
+            </div>
+          </div>
+
+          <div class="section-head"><div class="section-title">Cookie 使用类别</div>
+            <span style="font-size:12px;color:var(--ink-3)">非必要类别默认关闭</span></div>
+          <div class="ck-wrap">
+            <table class="ck-table">
+              <thead><tr><th>类别</th><th>用途</th><th>存放内容</th><th>保存期限</th></tr></thead>
+              <tbody id="ckCats"></tbody>
+            </table>
+          </div>
+
+          <div id="ckDoc"></div>
+        </div>
+      </div>
+
+      <aside class="side-col">
+        <div class="side-card">
+          <div class="side-title">⚡ 快捷操作</div>
+          <div style="display:grid;gap:8px">
+            <button class="btn btn-primary btn-block" id="ckOpen2">⚙️ 打开 Cookie 设置</button>
+            <a class="btn btn-outline btn-block" href="privacy.html">🔐 隐私政策</a>
+            <a class="btn btn-outline btn-block" href="about.html#contact">📮 联系我们</a>
+          </div>
+        </div>
+
+        <div class="side-card">
+          <div class="side-title">✅ 合规要点</div>
+          <p style="font-size:13px;color:var(--ink-2);line-height:1.9">
+            • 非必要 Cookie <b>默认关闭</b>，需你主动同意<br>
+            • 同意前不写入偏好 / 统计类数据<br>
+            • 随时可更改或撤回，操作同样简便<br>
+            • 同意有效期 <b id="ckDays">180</b> 天，到期重新征求<br>
+            • 条款版本更新后重新征求同意
+          </p>
+        </div>
+
+        <div class="side-card">
+          <div class="side-title">🇪🇺 你的权利（GDPR）</div>
+          <p style="font-size:13px;color:var(--ink-2);line-height:1.9">
+            访问 · 更正 · 删除 · 限制处理 · 反对处理 · 数据可携带 · 随时撤回同意。<br>
+            可向荷兰数据保护局（Autoriteit Persoonsgegevens）投诉。
+          </p>
+        </div>
+
+        <div class="side-card">
+          <div class="side-title">🛡️ 防骗提醒</div>
+          <p style="font-size:13px;color:var(--ink-2)">本站不会通过 Cookie 收集你的银行卡或密码信息；任何索要验证码、转账的要求均为诈骗。</p>
+        </div>
+      </aside>
+    </div>
+  </div>
+</div>
+
+<script src="assets/js/data.js"></script>
+<script src="assets/js/common.js"></script>
+<script src="assets/js/cookie.js"></script>
+</body>
+</html>

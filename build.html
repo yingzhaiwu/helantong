@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>建筑装修 - 荷兰同城</title>
+<meta name="description" content="荷兰同城建筑装修板块：整体装修、厨房卫浴、水电维修、木工家具、油漆粉刷、垃圾清运，找华人装修师傅与施工队。">
+<meta name="theme-color" content="#0E3B4A">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='10' fill='%23DF7A3A'/%3E%3Cpath d='M12.2 15.2c0-4.1 2.2-6.6 4.3-4.6.9-2.9 5.2-2.9 6.1 0 2.1-2 4.3.5 4.3 4.6 0 5.1-3.6 8.8-7.35 8.8s-7.35-3.7-7.35-8.8z' fill='white'/%3E%3Cpath d='M20 24v9.4' stroke='white' stroke-width='2.1' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<div id="page-content">
+  <div class="container">
+    <nav class="breadcrumb"><a href="index.html">首页</a> › <a href="list.html?cat=build">建筑装修</a> › <span>装修服务大厅</span></nav>
+
+    <div class="layout">
+      <div>
+        <div class="page-banner build">
+          <div>
+            <h1>🔨 建筑装修服务大厅</h1>
+            <p>找华人装修队、水电师傅、木工与清运服务；免费量房报价，签合同明确工期与保修。</p>
+          </div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <a class="btn btn-outline" href="publish.html?cat=build" style="background:#fff;border-color:#fff;color:#0F7C6C">＋ 发布装修需求</a>
+            <a class="btn btn-primary" href="publish.html?cat=build">我是服务商，入驻接单</a>
+          </div>
+        </div>
+
+        <div class="section-head">
+          <div class="section-title">装修服务分类</div>
+          <a class="section-more" href="list.html?cat=build">查看全部 ›</a>
+        </div>
+        <div class="svc-grid" id="svcGrid"></div>
+
+        <div class="card filter-card">
+          <div class="filter-row">
+            <div class="filter-label">城市</div>
+            <div class="filter-opts" id="cityOpts"></div>
+          </div>
+          <div class="filter-row" style="border-bottom:0">
+            <div class="filter-label">服务</div>
+            <div class="filter-opts" id="subOpts"></div>
+          </div>
+          <div class="filter-extra">
+            <div class="search-inline">
+              <input class="input" id="kw" placeholder="搜索装修师傅 / 服务…" style="width:220px">
+              <button class="btn btn-primary" id="searchBtn">搜索</button>
+            </div>
+            <select class="select" id="sortSel" style="margin-left:auto">
+              <option value="new">最新发布</option>
+              <option value="hot">最多点赞</option>
+              <option value="view">浏览最多</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="result-bar">
+          <div class="count">共 <b id="count">0</b> 条装修服务信息</div>
+          <a class="btn btn-primary btn-sm" href="publish.html?cat=build">＋ 发布</a>
+        </div>
+        <div class="post-list" id="list"></div>
+        <div style="text-align:center;margin-top:16px">
+          <button class="btn btn-outline btn-lg" id="moreBtn" style="min-width:180px">加载更多</button>
+        </div>
+
+        <div class="section-head" style="margin-top:24px"><div class="section-title">施工流程</div></div>
+        <div class="steps" id="steps"></div>
+
+        <div class="section-head" style="margin-top:24px">
+          <div class="section-title">案例展示</div>
+          <span style="color:var(--ink-3);font-size:12px">图片为占位示意</span>
+        </div>
+        <div class="case-grid" id="cases"></div>
+      </div>
+
+      <aside class="side-col">
+        <div class="side-card" style="background:linear-gradient(135deg,#E2F5F1,#F3FBF9);border-color:#BCE6DF">
+          <div class="side-title">🆓 免费量房报价</div>
+          <p style="color:var(--ink-2);font-size:13px;margin-bottom:12px">发布需求后，最多 3 位师傅主动联系你，可对比再决定。</p>
+          <a class="btn btn-primary btn-block" href="publish.html?cat=build">发布装修需求</a>
+        </div>
+
+        <div class="side-card">
+          <div class="side-title">👍 热门师傅 / 施工队</div>
+          <ul class="rank-list" id="rank"></ul>
+        </div>
+
+        <div class="side-card">
+          <div class="side-title">📌 装修避坑提醒</div>
+          <p style="font-size:13px;color:var(--ink-2)">
+            • 必须签书面合同，写明工期与违约责任<br>
+            • 大额工程分期付款，拒绝一次性全款<br>
+            • 涉及承重的改造需提前向 gemeente 申请<br>
+            • 索要 BTW 发票，便于保修维权
+          </p>
+        </div>
+
+        <div class="side-card">
+          <div class="side-title">📣 建材商家推广</div>
+          <p style="font-size:13px;color:var(--ink-2)">瓷砖、板材、五金商家可发布滚动信息，按积分计费，即时上线。</p>
+          <a class="btn btn-outline btn-block" style="margin-top:10px" href="ads.html">了解推广方式</a>
+        </div>
+      </aside>
+    </div>
+  </div>
+</div>
+
+<script src="assets/js/data.js"></script>
+<script src="assets/js/common.js"></script>
+<script src="assets/js/build.js"></script>
+</body>
+</html>

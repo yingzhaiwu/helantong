@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>分类信息 - 荷兰同城</title>
+<meta name="description" content="荷兰同城分类信息列表：招聘、求职、租房、商铺、交友、优惠信息，按城市、类型、价格多维筛选。覆盖阿姆斯特丹、鹿特丹、海牙等20+城市。">
+<meta name="keywords" content="荷兰招聘,荷兰求职,荷兰租房,荷兰商铺,荷兰交友,荷兰优惠,荷兰分类信息">
+<meta name="author" content="荷兰同城 NTC">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#0E3B4A">
+<meta property="og:title" content="分类信息 - 荷兰同城">
+<meta property="og:description" content="荷兰同城分类信息列表：招聘、求职、租房、商铺、交友、优惠信息，按城市、类型、价格多维筛选。">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://ntc.nl/list.html">
+<link rel="canonical" href="https://ntc.nl/list.html">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='10' fill='%23DF7A3A'/%3E%3Cpath d='M12.2 15.2c0-4.1 2.2-6.6 4.3-4.6.9-2.9 5.2-2.9 6.1 0 2.1-2 4.3.5 4.3 4.6 0 5.1-3.6 8.8-7.35 8.8s-7.35-3.7-7.35-8.8z' fill='white'/%3E%3Cpath d='M20 24v9.4' stroke='white' stroke-width='2.1' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<div id="page-content">
+  <div class="container">
+    <nav class="breadcrumb" id="crumb"></nav>
+
+    <div class="card filter-card">
+      <div class="filter-row">
+        <div class="filter-label">分类</div>
+        <div class="filter-opts" id="catOpts"></div>
+      </div>
+      <div class="filter-row">
+        <div class="filter-label">城市</div>
+        <div class="filter-opts" id="cityOpts"></div>
+      </div>
+      <div class="filter-row">
+        <div class="filter-label">类型</div>
+        <div class="filter-opts" id="subOpts"></div>
+      </div>
+      <div class="filter-row">
+        <div class="filter-label">价格</div>
+        <div class="filter-opts" id="priceOpts"></div>
+      </div>
+      <div class="filter-extra">
+        <div class="search-inline">
+          <input class="input" id="kw" placeholder="在本分类中搜索关键词…">
+          <button class="btn btn-primary" id="searchBtn">筛选</button>
+          <button class="btn btn-outline" id="resetBtn">重置</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="result-bar">
+      <div class="count">共找到 <b id="count">0</b> 条信息</div>
+      <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+        <select class="select" id="sortSel">
+          <option value="new">最新发布</option>
+          <option value="hot">最多点赞</option>
+          <option value="view">浏览最多</option>
+          <option value="priceAsc">价格从低到高</option>
+          <option value="priceDesc">价格从高到低</option>
+        </select>
+        <button class="btn btn-outline btn-sm" id="subBtn">🔔 订阅本分类</button>
+        <a class="btn btn-primary btn-sm" href="publish.html">＋ 发布</a>
+      </div>
+    </div>
+
+    <div class="post-list" id="list"></div>
+    <div style="text-align:center;margin-top:16px">
+      <button class="btn btn-outline btn-lg" id="moreBtn" style="min-width:180px">加载更多</button>
+    </div>
+  </div>
+</div>
+
+<script src="assets/js/data.js"></script>
+<script src="assets/js/common.js"></script>
+<script src="assets/js/list.js"></script>
+</body>
+</html>

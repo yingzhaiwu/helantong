@@ -1,0 +1,12 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><title>seed</title></head><body><script>
+try{
+  localStorage.setItem('hh_cookie_consent',JSON.stringify({version:'2026-09-18',mode:'all',choices:{necessary:true,preference:true,analytics:true,marketing:true},at:Date.now()}));
+  localStorage.setItem('hh_user',JSON.stringify({name:'站长',account:'admin@ntc.nl',role:'admin'}));
+  localStorage.setItem('hh_ad_slots',JSON.stringify({
+    ad1:{emoji:'',img:'',mode:'card',title:'过期广告测试',text:'这条应该显示已过期灰显',link:'https://example.com/old',expiresAt:Date.now()-86400000},
+    ad2:{emoji:'',img:'',mode:'card',title:'正常广告',text:'这条应该正常显示可点击',link:'https://example.com/new',expiresAt:Date.now()+86400000}
+  }));
+  localStorage.setItem('hh_ad_clean_ts', Date.now()); // 设为今天，跳过自动清理
+}catch(e){}
+document.title='SEEDED';
+</script></body></html>

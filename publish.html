@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>发布信息 - 荷兰同城</title>
+<meta name="description" content="在荷兰同城免费发布招聘、求职、租房、商铺、交友、优惠信息。覆盖阿姆斯特丹、鹿特丹、海牙等20+城市，30秒快速发布。">
+<meta name="keywords" content="荷兰发布信息,荷兰招聘,荷兰求职,荷兰租房,荷兰商铺转让,荷兰交友">
+<meta name="author" content="荷兰同城 NTC">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#0E3B4A">
+<meta property="og:title" content="发布信息 - 荷兰同城">
+<meta property="og:description" content="在荷兰同城免费发布招聘、求职、租房、商铺、交友、优惠信息。30秒快速发布，立即展示。">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://ntc.nl/publish.html">
+<link rel="canonical" href="https://ntc.nl/publish.html">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='10' fill='%23DF7A3A'/%3E%3Cpath d='M12.2 15.2c0-4.1 2.2-6.6 4.3-4.6.9-2.9 5.2-2.9 6.1 0 2.1-2 4.3.5 4.3 4.6 0 5.1-3.6 8.8-7.35 8.8s-7.35-3.7-7.35-8.8z' fill='white'/%3E%3Cpath d='M20 24v9.4' stroke='white' stroke-width='2.1' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<div id="page-content">
+  <div class="container">
+    <nav class="breadcrumb"><a href="index.html">首页</a> › <span>发布信息</span></nav>
+
+    <div class="layout">
+      <div>
+        <div class="card form-card">
+          <div class="section-head">
+            <div class="section-title">① 选择分类</div>
+            <span style="color:var(--ink-3);font-size:12px">选择正确的分类，信息更容易被看到</span>
+          </div>
+          <div class="pick-grid" id="catPick"></div>
+
+          <div style="height:1px;background:var(--line);margin:20px 0"></div>
+
+          <div class="section-head">
+            <div class="section-title">② 填写信息</div>
+            <span style="color:var(--ink-3);font-size:12px">带 <span class="req" style="font-size:13px">*</span> 为必填（仅标题、城市），其余均可留空</span>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="f_title">标题 <span class="req">*</span>
+              <span class="hint">一句话说清核心信息，例如「鹿特丹市中心 Studio 转租，可注册」</span></label>
+            <input class="input" id="f_title" maxlength="60" placeholder="请输入标题">
+            <div class="counter" id="titleCount">0 / 60</div>
+            <div class="field-err" id="err_title">请填写标题（至少 4 个字）</div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="f_city">城市 <span class="req">*</span>
+                <span class="hint">选「其他城市」可自行填写</span></label>
+              <select class="select-input" id="f_city"></select>
+              <input class="input hide" id="f_cityCustom" maxlength="30" placeholder="请填写城市名称，如：Almere">
+              <div class="field-err" id="err_city">请选择或填写城市</div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="f_desc">详细描述 <span class="hint">可留空，建议写清时间、条件、注意事项与联系方式</span></label>
+            <textarea class="textarea" id="f_desc" maxlength="1000" placeholder="把关键信息写清楚：时间、条件、注意事项…"></textarea>
+            <div class="counter" id="descCount">0 / 1000</div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">图片 <span class="hint">首图作为封面</span></label>
+            <div class="uploader" id="uploader"></div>
+            <p class="hint" id="imgTip">最多 5 张 · 自动压缩到 1200px 内 · 仅本地预览</p>
+            <input type="file" id="fileInput" accept="image/*" multiple hidden>
+          </div>
+        </div>
+
+        <div class="card form-card" style="margin-top:14px">
+          <div class="section-head">
+            <div class="section-title">③ 推广 <span style="font-weight:400;color:var(--ink-3);font-size:12px">（选填）</span></div>
+            <span style="color:var(--ink-3);font-size:12px">可留空，不影响发布</span>
+          </div>
+
+          <label class="check-line" style="margin-bottom:0">
+            <input type="checkbox" id="f_scroll"> 置为「滚动信息」，在全站滚动条展示
+            <b style="color:var(--brand-600)">150 积分 / 天</b>
+          </label>
+          <div class="hide" id="scrollDaysWrap">
+            <div class="form-row" style="margin-top:14px">
+              <div class="form-group">
+                <label class="form-label" for="f_days">展示天数
+                  <span class="hint" id="daysHint">消耗 150 积分 / 天，到期自动转为普通信息</span></label>
+                <input class="input" id="f_days" type="number" min="1" max="90" step="1" value="7">
+              </div>
+              <div class="form-group">
+                <label class="form-label">积分结算</label>
+                <div class="point-bill" id="billBox"></div>
+                <div class="field-err" id="err_points">当前积分不足，可减少天数，或前往积分管理获取积分</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card form-card" style="margin-top:14px">
+          <label class="check-line" style="margin-bottom:14px">
+            <input type="checkbox" id="f_agree"> 我已阅读并同意
+            <a href="about.html#rules" target="_blank" style="color:var(--brand-600);font-weight:700">《荷兰同城信息发布规则》</a>，
+            并承诺所发信息<b>真实、不虚假、不违法</b>，愿承担相应责任
+          </label>
+          <div class="field-err" id="err_agree" style="margin-bottom:10px">请先同意发布规则</div>
+          <div style="display:flex;gap:10px;flex-wrap:wrap">
+            <button class="btn btn-primary btn-lg" id="submitBtn" style="min-width:160px">🚀 发布信息</button>
+            <button class="btn btn-outline btn-lg" id="previewBtn">👀 预览</button>
+            <button class="btn btn-outline btn-lg" id="draftBtn">💾 存草稿</button>
+            <span style="align-self:center;color:var(--ink-3);font-size:12px" id="draftTip"></span>
+          </div>
+        </div>
+      </div>
+
+      <aside class="side-col">
+        <div class="side-card">
+          <div class="side-title">💡 发布小贴士</div>
+          <p style="font-size:13px;color:var(--ink-2)">
+            • 标题写清城市 + 核心信息，点击率提升 3 倍<br>
+            • 附上真实图片，可信度更高<br>
+            • 价格、时间写具体，减少无效咨询<br>
+            • 每周可免费刷新一次，信息回到顶部
+          </p>
+        </div>
+        <div class="side-card">
+          <div class="side-title">⭐ 我的积分</div>
+          <div id="ptsSide"></div>
+        </div>
+        <div class="side-card">
+          <div class="side-title">⚡ 积分规则</div>
+          <p style="font-size:13px;color:var(--ink-2)">
+            • 发布一条信息：<b style="color:var(--green)">+100 积分</b><br>
+            • 滚动信息：150 积分 / 天<br>
+            • 邀请好友：+100 积分 / 位<br>
+            • 每日签到：+20 积分<br>
+            <span style="color:var(--ink-3)">积分足够即立即上线，无须审批。</span>
+          </p>
+          <a class="btn btn-ghost btn-block" style="margin-top:10px" href="user.html?tab=points">积分管理</a>
+          <button class="btn btn-outline btn-block" style="margin-top:8px" data-invite>👥 邀请好友 +100</button>
+        </div>
+        <div class="side-card">
+          <div class="side-title">✅ 发布即上线</div>
+          <p style="font-size:13px;color:var(--ink-2)">
+            会员发布的信息<b>无须审核，提交后立即展示</b>。<br>
+            请确保内容真实、不虚假、不违法；违规信息将被下架并扣除相应积分。
+          </p>
+          <a class="btn btn-outline btn-block" style="margin-top:10px" href="about.html#faq">查看常见问题</a>
+        </div>
+      </aside>
+    </div>
+  </div>
+</div>
+
+<script src="assets/js/data.js"></script>
+<script src="assets/js/common.js"></script>
+<script src="assets/js/publish.js"></script>
+</body>
+</html>

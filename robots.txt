@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /user.html
+Disallow: /login.html
+
+Sitemap: https://ntc.nl/sitemap.xml

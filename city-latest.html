@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>同城最新 - 荷兰同城</title>
+<meta name="description" content="荷兰同城最新信息，按最新发布、最多点赞或同城优先查看招聘、求职、租房、商铺、交友和优惠内容。">
+<meta name="keywords" content="荷兰同城最新,荷兰最新招聘,荷兰最新租房,荷兰华人信息">
+<meta name="author" content="荷兰同城 NTC">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#0E3B4A">
+<meta property="og:title" content="同城最新 - 荷兰同城">
+<meta property="og:description" content="按最新发布、最多点赞或同城优先查看荷兰同城信息。">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://ntc.nl/city-latest.html">
+<link rel="canonical" href="https://ntc.nl/city-latest.html">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='10' fill='%23DF7A3A'/%3E%3Cpath d='M12.2 15.2c0-4.1 2.2-4.6 5.2 0.9-2.9 5.2-7.35 8.8s-7.35-3.7-7.35-8.8z' fill='white'/%3E%3Cpath d='M20 24v9.4' stroke='white' stroke-width='2.1' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+<div id="page-content">
+  <div class="container">
+    <nav class="breadcrumb"><a href="index.html">首页</a> › <span>同城最新</span></nav>
+    <div class="section-head">
+      <div>
+        <div class="section-title">同城最新</div>
+        <p style="margin:5px 0 0;color:var(--ink-3);font-size:12px">集中查看全站最新信息，支持排序切换。</p>
+      </div>
+      <a class="btn btn-outline btn-sm" href="index.html">返回首页</a>
+    </div>
+    <section class="card card-pad city-latest-page-card">
+      <div class="section-head" style="margin:0 0 8px">
+        <div class="count" style="color:var(--ink-3);font-size:12px">共 <b id="latestCount">0</b> 条信息</div>
+        <div class="tabs" id="latestTabs">
+          <button class="active" data-sort="new">最新</button>
+          <button data-sort="hot">最热</button>
+          <button data-sort="near">同城优先</button>
+        </div>
+      </div>
+      <div class="post-list" id="latestList"></div>
+      <div class="more-row"><button class="btn btn-outline btn-lg" id="latestMore">加载更多</button></div>
+    </section>
+  </div>
+</div>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/common.js"></script>
+<script>
+(function () {
+  initShell({ cat: '', tab: 'cat' });
+  const PAGE = 20;
+  let sort = 'new';
+  let shown = 0;
+  let list = [];
+  function compute() {
+    const city = Store.city();
+    list = allPosts().slice();
+    if (sort === 'new') list.sort((a, b) => a.mins - b.mins);
+    else if (sort === 'hot') list.sort((a, b) => (b.likes || 0) - (a.likes || 0));
+    else list.sort((a, b) => (b.city === city) - (a.city === city) || a.mins - b.mins);
+  }
+  function render(reset) {
+    compute();
+    if (reset) { shown = 0; document.getElementById('latestList').innerHTML = ''; }
+    const next = list.slice(shown, shown + PAGE);
+    document.getElementById('latestList').insertAdjacentHTML('beforeend', next.map((p) => feedRowHtml(p)).join(''));
+    shown += next.length;
+    document.getElementById('latestCount').textContent = list.length;
+    const more = document.getElementById('latestMore');
+    more.classList.toggle('hide', shown >= list.length);
+    more.textContent = shown >= list.length ? '已加载全部' : '加载更多 (' + (list.length - shown) + ')';
+  }
+  document.getElementById('latestTabs').addEventListener('click', (e) => {
+    const btn = e.target.closest('button');
+    if (!btn) return;
+    document.querySelectorAll('#latestTabs button').forEach((x) => x.classList.remove('active'));
+    btn.classList.add('active'); sort = btn.dataset.sort; render(true);
+  });
+  document.getElementById('latestMore').addEventListener('click', () => render(false));
+  render(true);
+})();
+</script>
+</body>
+</html>

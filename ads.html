@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>其他信息 - 荷兰同城</title>
+<meta name="description" content="荷兰同城其他信息板块：商务推广、课程培训、家政服务、摄影摄像、翻译公证、法律咨询，会员可用积分升级为全站滚动信息。">
+<meta name="theme-color" content="#0E3B4A">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='10' fill='%23DF7A3A'/%3E%3Cpath d='M12.2 15.2c0-4.1 2.2-6.6 4.3-4.6.9-2.9 5.2-2.9 6.1 0 2.1-2 4.3.5 4.3 4.6 0 5.1-3.6 8.8-7.35 8.8s-7.35-3.7-7.35-8.8z' fill='white'/%3E%3Cpath d='M20 24v9.4' stroke='white' stroke-width='2.1' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<div id="page-content">
+  <div class="container">
+    <nav class="breadcrumb"><a href="index.html">首页</a> › <a href="list.html?cat=ads">其他信息</a> › <span>推广与广告服务</span></nav>
+
+    <div class="layout">
+      <div>
+        <div class="page-banner ads">
+          <div>
+            <h1>📣 其他信息 / 推广服务</h1>
+            <p>商务推广、课程培训、家政、摄影、翻译与法律咨询；会员可用积分升级为全站滚动信息。</p>
+          </div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <a class="btn btn-outline" href="publish.html?cat=ads" style="background:#fff;border-color:#fff;color:#0369A1">＋ 发布信息</a>
+            <a class="btn btn-primary" href="user.html?tab=points">⭐ 积分管理</a>
+          </div>
+        </div>
+
+        <div class="section-head" style="margin-top:20px"><div class="section-title">广告分类快捷入口</div></div>
+        <div class="card card-pad">
+          <div class="filter-opts" id="adCats"></div>
+        </div>
+
+        <div class="section-head" style="margin-top:20px"><div class="section-title">最新广告信息</div></div>
+        <div class="card filter-card">
+          <div class="filter-row">
+            <div class="filter-label">城市</div>
+            <div class="filter-opts" id="cityOpts"></div>
+          </div>
+          <div class="filter-row" style="border-bottom:0">
+            <div class="filter-label">类型</div>
+            <div class="filter-opts" id="subOpts"></div>
+          </div>
+          <div class="filter-extra">
+            <div class="search-inline">
+              <input class="input" id="kw" placeholder="搜索广告 / 服务…" style="width:220px">
+              <button class="btn btn-primary" id="searchBtn">搜索</button>
+            </div>
+            <select class="select" id="sortSel" style="margin-left:auto">
+              <option value="new">最新发布</option>
+              <option value="hot">最多点赞</option>
+              <option value="view">浏览最多</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="result-bar">
+          <div class="count">共 <b id="count">0</b> 条广告信息</div>
+          <a class="btn btn-primary btn-sm" href="publish.html?cat=ads">＋ 发布广告</a>
+        </div>
+        <div class="post-list" id="list"></div>
+        <div style="text-align:center;margin-top:16px">
+          <button class="btn btn-outline btn-lg" id="moreBtn" style="min-width:180px">加载更多</button>
+        </div>
+
+        <div class="section-head" style="margin-top:24px" id="plans">
+          <div class="section-title">会员推广方式（积分）</div>
+          <span style="color:var(--ink-3);font-size:12px">积分足够即立即上线，无须审批</span>
+        </div>
+        <div class="plan-grid" id="plans2"></div>
+      </div>
+
+      <aside class="side-col">
+        <div class="side-card" style="background:linear-gradient(135deg,#E3F4FD,#F5FBFF);border-color:#BEE3F8">
+          <div class="side-title">🚀 立即发布推广</div>
+          <p style="color:var(--ink-2);font-size:13px;margin-bottom:12px">会员发布无须审批，积分足够即可上线；选「滚动信息」可覆盖全站滚动条。</p>
+          <a class="btn btn-primary btn-block" href="publish.html?cat=ads">立即发布</a>
+        </div>
+
+        <div class="side-card">
+          <div class="side-title">⭐ 积分消耗</div>
+          <p style="font-size:13px;color:var(--ink-2)">
+            • 发布一条信息：<b style="color:var(--green)">+100 积分</b><br>
+            • 滚动信息：150 积分 / 天<br>
+            • 每日签到：+20 积分
+          </p>
+          <a class="btn btn-ghost btn-block" style="margin-top:10px" href="user.html?tab=points">积分管理</a>
+        </div>
+
+        <div class="side-card">
+          <div class="side-title">📈 发布须知</div>
+          <p style="font-size:13px;color:var(--ink-2)">
+            • 内容需真实合法，禁止虚假宣传<br>
+            • 图片建议 1200×630，首图作为封面<br>
+            • 会员发布即时上线，无须等待审核<br>
+            • 违规信息将被下架并扣除相应积分
+          </p>
+        </div>
+
+        <div class="side-card">
+          <div class="side-title">🔥 热门广告</div>
+          <ul class="rank-list" id="rank"></ul>
+        </div>
+
+        <div class="side-card">
+          <div class="side-title">☎️ 广告业务联系</div>
+          <p style="font-size:13px;color:var(--ink-2)">
+            微信：NTC_ad<br>邮箱：ad@ntc.nl<br>工作时间：周一至周日 10:00-20:00
+          </p>
+          <a class="btn btn-outline btn-block" style="margin-top:10px" href="about.html#contact">在线留言咨询</a>
+        </div>
+      </aside>
+    </div>
+  </div>
+</div>
+
+<script src="assets/js/data.js"></script>
+<script src="assets/js/common.js"></script>
+<script src="assets/js/ads.js"></script>
+</body>
+</html>
