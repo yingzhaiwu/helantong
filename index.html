@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>荷兰同城 · 荷兰华人同城信息平台 | 招聘 求职 租房 商铺 交友 优惠</title>
+<meta name="description" content="荷兰同城 NTC，荷兰华人同城信息平台：招聘信息、求职信息、租房信息、商铺买卖、生活交友、优惠信息，免费发布，同城直达。覆盖阿姆斯特丹、鹿特丹、海牙等20+城市。">
+<meta name="keywords" content="荷兰同城,荷兰华人,荷兰招聘,荷兰求职,荷兰租房,荷兰商铺,荷兰交友,荷兰优惠,荷兰生活,阿姆斯特丹,鹿特丹,海牙">
+<meta name="author" content="荷兰同城 NTC">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#0E3B4A">
+<meta property="og:title" content="荷兰同城 · 荷兰华人同城信息平台">
+<meta property="og:description" content="荷兰华人同城信息平台：招聘、求职、租房、商铺、交友、优惠，免费发布，同城直达。">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://ntc.nl/">
+<meta property="og:image" content="https://ntc.nl/assets/img/og-image.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="荷兰同城 · 荷兰华人同城信息平台">
+<meta name="twitter:description" content="荷兰华人同城信息平台：招聘、求职、租房、商铺、交友、优惠，免费发布，同城直达。">
+<link rel="canonical" href="https://ntc.nl/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='10' fill='%23DF7A3A'/%3E%3Cpath d='M12.2 15.2c0-4.1 2.2-6.6 4.3-4.6.9-2.9 5.2-2.9 6.1 0 2.1-2 4.3.5 4.3 4.6 0 5.1-3.6 8.8-7.35 8.8s-7.35-3.7-7.35-8.8z' fill='white'/%3E%3Cpath d='M20 24v9.4' stroke='white' stroke-width='2.1' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="assets/css/style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "荷兰同城",
+  "alternateName": "NTC",
+  "url": "https://ntc.nl/",
+  "description": "荷兰华人同城信息平台：招聘、求职、租房、商铺、交友、优惠",
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": "https://ntc.nl/list.html?q={search_term_string}",
+    "query-input": "required name=search_term_string"
+  }
+}
+</script>
+</head>
+<body>
+
+<div id="page-content">
+  <div class="container is-home">
+
+    <!-- Hero + 邀请好友统一模块 -->
+    <section class="hero">
+      <div class="hero-wm" id="heroWm" aria-hidden="true"></div>
+      <h1>在荷兰，找信息，上荷兰同城 🌷</h1>
+      <p>覆盖阿姆斯特丹、鹿特丹等 20+ 城市的信息广场。招工、找房、转店、拼局、捡优惠，一键发布，同城直达。</p>
+      <div class="hero-invite">
+        <div class="hero-invite-copy">
+          <div class="is-badge">👥 邀请有礼 · 无限额</div>
+          <h3>邀请 1 位好友，<b>双方各得 <span id="invBonus">100</span> 积分</b></h3>
+          <p>积分可用于全站滚动信息（<span id="invScroll">150</span>积分/天），可<span class="hl-txt">即时发布</span>信息，并获得奖励 100 积分/条。</p>
+          <div class="is-mini" id="invMine">已邀请 0 位 · 累计 +0 积分</div>
+        </div>
+        <div class="hero-invite-actions">
+          <button class="btn btn-primary" data-invite>🎁 立即邀请</button>
+          <button class="btn btn-primary" id="signBtnHome">📅 签到 +20</button>
+          <a class="btn btn-outline" href="user.html?tab=points">⭐ 我的积分</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 全站滚动信息条（示意） -->
+    <div class="ad-slot">
+      <span class="ad-slot-label">滚动信息条 · 会员 150 积分/天</span>
+      <div class="ad-slot-viewport"><div class="ad-slot-track" id="slotTrack"></div></div>
+    </div>
+
+    <!-- 分类宫格 -->
+    <div class="cat-grid" id="catGrid"></div>
+
+    <!-- 两列并排：广告位招租 | 同城最新，桌面端左右齐平
+         ⚠️ DOM 顺序 = 桌面端从左到右的顺序。
+         平板/手机（≤1100px）下靠 CSS 的 order 把「同城最新」提到最前，见 style.css。 -->
+    <div class="layout layout-3col">
+
+      <!-- ① 广告位招租：8 格等分高度，撑满整列 -->
+      <section class="side-card mod ad-rent-card">
+        <div class="mod-head">
+          <div class="section-title"><span class="st-emoji">📣</span>广告位招租</div>
+          <div class="mod-acts">
+            <span class="mod-note" id="adSlotCount"></span>
+            <span class="ad-rent-badge hide" id="adAdminBadge">✎ 管理员</span>
+          </div>
+        </div>
+        <div class="ad-rent-grid" id="adRentGrid"></div>
+      </section>
+
+      <!-- ② 同城最新 -->
+      <div class="feed-col">
+        <div class="section-head mod-head">
+          <div class="section-title">同城最新</div>
+          <div class="tabs" id="feedTabs">
+            <button class="active" data-sort="new">最新</button>
+            <button data-sort="hot">最热</button>
+            <button data-sort="near">同城优先</button>
+          </div>
+        </div>
+        <div class="post-list" id="feed"></div>
+        <div class="more-row">
+          <a class="btn btn-outline" id="moreBtn" href="city-latest.html">加载更多同城信息</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="assets/js/data.js"></script>
+<script src="assets/js/common.js"></script>
+<script src="assets/js/home.js"></script>
+</body>
+</html>
